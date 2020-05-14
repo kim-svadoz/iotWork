@@ -1,0 +1,23 @@
+package basic;
+
+import gnu.io.CommPortIdentifier;
+import gnu.io.NoSuchPortException;
+
+public class SerialConnectionTest {
+
+	public SerialConnectionTest() {
+		
+	}
+	public void connect(String portName) {
+		try {
+			CommPortIdentifier commPortIdentifier = 
+					CommPortIdentifier.getPortIdentifier(portName);
+		} catch (NoSuchPortException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void main(String[] args) {
+		new SerialConnectionTest().connect("COM8"); 
+	}
+
+}

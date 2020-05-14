@@ -1,0 +1,6 @@
+package android.controll;
+
+//TCP서버쪽에 클라이언트의 요청을 계쏙 읽는 쓰레드
+public class ReceiverThread extends Thread{
+
+}
