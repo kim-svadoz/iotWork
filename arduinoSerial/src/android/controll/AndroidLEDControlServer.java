@@ -5,8 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import basic.SerialArduinoLEDTest;
-//¾Èµå·ÎÀÌµå(Å¬¶óÀÌ¾ğÆ®)ÀÇ ¿äÃ»À» ¹ŞÀ¸¸é ¾È¿¡¼­ ÀåÄ¡¿Í Åë½ÅÇÏ´Â
-//½Ã¸®¾óÅë½Å °´Ã¼ ÂÊÀ¸·Î ¿äÃ»À» Àü´ŞÇÏ´Â ¼­¹ö
+//ì•ˆë“œë¡œì´ë“œ(í´ë¼ì´ì–¸íŠ¸)ì˜ ìš”ì²­ì„ ë°›ìœ¼ë©´ ì•ˆì—ì„œ ì¥ì¹˜ì™€ í†µì‹ í•˜ëŠ”
+//ì‹œë¦¬ì–¼í†µì‹  ê°ì²´ ìª½ìœ¼ë¡œ ìš”ì²­ì„ ì „ë‹¬í•˜ëŠ” ì„œë²„
 public class AndroidLEDControlServer {
 	private ServerSocket server;
 	public void connect() {
@@ -25,8 +25,8 @@ public class AndroidLEDControlServer {
 					try {
 						Socket client = server.accept();
 						String ip = client.getInetAddress().getHostAddress();
-						System.out.println(ip+"»ç¿ëÀÚÁ¢¼Ó!!\n");
-						//Å¬¶óÀÌ¾ğÆ®ÀÇ º¸³»´Â ¸Ş½ÃÁö¸¦ ÀĞ°í ÀÖ´Â ¾²·¹µå
+						System.out.println(ip+"ì‚¬ìš©ìì ‘ì†!!\n");
+						//í´ë¼ì´ì–¸íŠ¸ì˜ ë³´ë‚´ëŠ” ë©”ì‹œì§€ë¥¼ ì½ê³  ìˆëŠ” ì“°ë ˆë“œ
 						new ReceiverThread(client).start();
 					} catch (IOException e) {
 						e.printStackTrace();

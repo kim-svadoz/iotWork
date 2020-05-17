@@ -7,21 +7,21 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-//TCP¼­¹öÂÊ¿¡ Å¬¶óÀÌ¾ğÆ®ÀÇ ¿äÃ»À» °è½ï ÀĞ´Â ¾²·¹µå
+//TCPì„œë²„ìª½ì— í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ì„ ê³„ì™ ì½ëŠ” ì“°ë ˆë“œ
 public class ReceiverThread extends Thread{
 	Socket client;
-	BufferedReader br; // Å¬¶óÀÌ¾ğÆ®ÀÇ ¸Ş½ÃÁö¸¦ ÀĞ´Â ½ºÆ®¸²
-	PrintWriter pw; // Å¬¶óÀÌ¾ğÆ®¿¡°Ô ¸Ş½ÃÁö¸¦ Àü´ŞÇÏ´Â ½ºÆ®¸²
-	SerialArduinoLEDControl serialObj; // ½Ã¸®¾ó Åë½ÅÀ» À§ÇÑ °´Ã¼
-	OutputStream os; // ½Ã¸®¾óÅë½Å¿¡¼­ ¾ÆµÎÀÌ³ë·Î µ¥ÀÌÅÍ¸¦ ³»º¸³»±â À§ÇÑ ½ºÆ®¸²
+	BufferedReader br; // í´ë¼ì´ì–¸íŠ¸ì˜ ë©”ì‹œì§€ë¥¼ ì½ëŠ” ìŠ¤íŠ¸ë¦¼
+	PrintWriter pw; // í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ë©”ì‹œì§€ë¥¼ ì „ë‹¬í•˜ëŠ” ìŠ¤íŠ¸ë¦¼
+	SerialArduinoLEDControl serialObj; // ì‹œë¦¬ì–¼ í†µì‹ ì„ ìœ„í•œ ê°ì²´
+	OutputStream os; // ì‹œë¦¬ì–¼í†µì‹ ì—ì„œ ì•„ë‘ì´ë…¸ë¡œ ë°ì´í„°ë¥¼ ë‚´ë³´ë‚´ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼
 	public ReceiverThread(Socket client) {
 		this.client = client;
-		//Å¬¶óÀÌ¾ğÆ®°¡ º¸³»¿À´Â ¸Ş½ÃÁö¸¦ ÀĞ±â À§ÇÑ ½ºÆ®¸² »ı¼º
+		//í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ë‚´ì˜¤ëŠ” ë©”ì‹œì§€ë¥¼ ì½ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼ ìƒì„±
 		try {
 			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			//Å¬¶óÀÌ¾ğÆ®¿¡°Ô ¸Ş½ÃÁö¸¦ Àü¼ÛÇÏ±â À§ÇÑ ½ºÆ®¸² »ı¼º
+			//í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ë©”ì‹œì§€ë¥¼ ì „ì†¡í•˜ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼ ìƒì„±
 			pw = new PrintWriter(client.getOutputStream(), true);
-			//¾ÆµÎÀÌ³ë¿Í ½Ã¸®¾óÅë½ÅÀ» ÇÏ±â À§ÇØ ¾ÆµÎÀÌ³ë ÂÊÀ¸·Î µ¥ÀÌÅÍ¸¦ ³»º¸³»±â À§ÇÑ ½ºÆ®¸² ¹Ş±â
+			//ì•„ë‘ì´ë…¸ì™€ ì‹œë¦¬ì–¼í†µì‹ ì„ í•˜ê¸° ìœ„í•´ ì•„ë‘ì´ë…¸ ìª½ìœ¼ë¡œ ë°ì´í„°ë¥¼ ë‚´ë³´ë‚´ê¸° ìœ„í•œ ìŠ¤íŠ¸ë¦¼ ë°›ê¸°
 			serialObj = new SerialArduinoLEDControl();
 			serialObj.connect("COM8");
 			os = serialObj.getOutput();
@@ -30,11 +30,11 @@ public class ReceiverThread extends Thread{
 		}
 	}
 	public void run() {
-		//Å¬¶óÀÌ¾ğÆ®ÀÇ ¸Ş½ÃÁö¸¦ ¹Ş¾Æ¼­ ¾ÆµÎÀÌ³ë·Î µ¥ÀÌÅÍ¸¦ Àü¼Û
+		//í´ë¼ì´ì–¸íŠ¸ì˜ ë©”ì‹œì§€ë¥¼ ë°›ì•„ì„œ ì•„ë‘ì´ë…¸ë¡œ ë°ì´í„°ë¥¼ ì „ì†¡
 		while(true) {
 			try {
 				String msg = br.readLine();
-				System.out.println("Å¬¶óÀÌ¾ğÆ®°¡ º¸³»¿À´Â ¸Ş½ÃÁö:"+msg);
+				System.out.println("í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ë‚´ì˜¤ëŠ” ë©”ì‹œì§€:"+msg);
 				if(msg.equals("led_on")) {
 					os.write('1');
 				}else {

@@ -19,24 +19,24 @@ public class SerialArduinoLEDControl {
 	}
 	public void connect(String portName) {
 		try {
-			//COMÆ÷Æ®°¡ ½ÇÁ¦ Á¸ÀçÇÏ°í »ç¿ë°¡´ÉÇÑ »óÅÂÀÎÁö È®ÀÎ
+			//COMí¬íŠ¸ê°€ ì‹¤ì œ ì¡´ì¬í•˜ê³  ì‚¬ìš©ê°€ëŠ¥í•œ ìƒíƒœì¸ì§€ í™•ì¸
 			CommPortIdentifier commPortIdentifier = 
 					CommPortIdentifier.getPortIdentifier(portName);
-			//Æ÷Æ®°¡ »ç¿ëÁßÀÎÁö Ã¼Å©
+			//í¬íŠ¸ê°€ ì‚¬ìš©ì¤‘ì¸ì§€ ì²´í¬
 			if(commPortIdentifier.isCurrentlyOwned()) {
-				System.out.println("Æ÷Æ® »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.");
+				System.out.println("í¬íŠ¸ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 			}else {
-				System.out.println("Æ÷Æ® »ç¿ë°¡´É.");
-				//port°¡ »ç¿ë °¡´ÉÇÏ¸é Æ÷Æ®¸¦ ¿­°í Æ÷Æ®°´Ã¼¸¦ ¾ò¾î¿À±â
-				//¸Å°³º¯¼ö1 : Æ÷Æ®¸¦ ¿­°í »ç¿ëÇÏ´Â ÇÁ·Î±×·¥ÀÇ ÀÌ¸§(¹®ÀÚ¿­)
-				//¸Å°³º¯¼ö2 : Æ÷Æ®¸¦ ¿­°í Åë½ÅÇÏ±â À§ÇØ¼­ ±â´Ù¸®´Â ½Ã°£(¹Ğ¸®¼¼ÄÁµå)
+				System.out.println("í¬íŠ¸ ì‚¬ìš©ê°€ëŠ¥.");
+				//portê°€ ì‚¬ìš© ê°€ëŠ¥í•˜ë©´ í¬íŠ¸ë¥¼ ì—´ê³  í¬íŠ¸ê°ì²´ë¥¼ ì–»ì–´ì˜¤ê¸°
+				//ë§¤ê°œë³€ìˆ˜1 : í¬íŠ¸ë¥¼ ì—´ê³  ì‚¬ìš©í•˜ëŠ” í”„ë¡œê·¸ë¨ì˜ ì´ë¦„(ë¬¸ìì—´)
+				//ë§¤ê°œë³€ìˆ˜2 : í¬íŠ¸ë¥¼ ì—´ê³  í†µì‹ í•˜ê¸° ìœ„í•´ì„œ ê¸°ë‹¤ë¦¬ëŠ” ì‹œê°„(ë°€ë¦¬ì„¸ì»¨ë“œ)
 				CommPort commPort =
 						commPortIdentifier.open("basic_serial",
 								5000);
 				if(commPort instanceof SerialPort) {
 					System.out.println("SerialPort");
 					SerialPort serialPort = (SerialPort)commPort;
-					//SerialPort¿¡ ´ëÇÑ ¼³Á¤
+					//SerialPortì— ëŒ€í•œ ì„¤ì •
 					serialPort.setSerialPortParams(9600,
 							SerialPort.DATABITS_8,
 							SerialPort.STOPBITS_1,
@@ -44,12 +44,12 @@ public class SerialArduinoLEDControl {
 					in = serialPort.getInputStream();
 					out = serialPort.getOutputStream();
 					
-					//µ¥ÀÌÅÍ¸¦ ÁÖ°í ¹Ş´Â ÀÛ¾÷À» ¿©±â¿¡
-					//¾Èµå·ÎÀÌµå¿¡¼­ ÀÔ·Â¹ŞÀº °ªÀ» ¾ÆµÎÀÌ³ë·Î Àü¼ÛÇÏ´Â ¾²·¹µå 
+					//ë°ì´í„°ë¥¼ ì£¼ê³  ë°›ëŠ” ì‘ì—…ì„ ì—¬ê¸°ì—
+					//ì•ˆë“œë¡œì´ë“œì—ì„œ ì…ë ¥ë°›ì€ ê°’ì„ ì•„ë‘ì´ë…¸ë¡œ ì „ì†¡í•˜ëŠ” ì“°ë ˆë“œ 
 					//new SerialArduinoWriterThread(out).start();
 					
 				}else {
-					System.out.println("SerialPort¸¸ ÀÛ¾÷ÇÒ ¼ö ÀÖ½À´Ï´Ù.");
+					System.out.println("SerialPortë§Œ ì‘ì—…í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 				}
 			}
 		} catch (NoSuchPortException e) {
@@ -62,7 +62,7 @@ public class SerialArduinoLEDControl {
 			e.printStackTrace();
 		}
 	}
-	//½Ã¸®¾ó Ãâ·ÂÀ» À§ÇÑ OutputStream¸®ÅÏ
+	//ì‹œë¦¬ì–¼ ì¶œë ¥ì„ ìœ„í•œ OutputStreamë¦¬í„´
 	public OutputStream getOutput(){
 		return out;
 	}
